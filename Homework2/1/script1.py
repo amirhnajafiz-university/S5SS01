@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np 
 
-def convolution(a, b):
+
+def convolution(a, b):  # Convolving two signals
     a = np.concatenate([ np.zeros( len(b) / 2 - 1 ), a,  np.zeros( len(b) / 2 )])
     b = b[::-1]
 
@@ -26,6 +27,7 @@ d_step = 1
 # Signals
 t = np.arange(start, end, d_step)
 
+# DT signals
 x1 = [1, 2, 3, 2, 1, 2, 3]
 x1 = np.concatenate([np.zeros(len(t) / 2 - len(x1) / 2 - 1), x1, np.zeros(len(t) / 2 - len (x1) / 2)])
 
