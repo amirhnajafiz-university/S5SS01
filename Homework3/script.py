@@ -39,8 +39,6 @@ x1 = [linear_draw(1, 2, x) for x in np.arange(-2, -1, step)]
 x1 += [linear_draw(-1, 0, x) for x in np.arange(-1, 1, step)]
 x1 += [linear_draw(1, -2, x) for x in np.arange(1, 2, step)]
 
-print(len(x1))
-print(len(t1))
 
 fig, s1 = plt.subplots()
 s1.plot(t1, x1, 'r', label="x1(t)")
@@ -55,10 +53,13 @@ s1.plot(t1, x1, 'r', label="x1(t)")
 # s1.grid()
 
 # #sig2
-# x2 = np.heaviside(-t, 1) + np.heaviside(t-3, 1)
+x2 = [0 for x in np.arange(-4, -3, step)]
+x2 += [1 for x in np.arange(-3, 0, step)]
+x2 += [0 for x in np.arange(0, 3, step)]
+x2 += [1 for x in np.arange(3, 4, step)]
 
-# fig, s2 = plt.subplots()
-# s2.plot(t, x2, 'r', label="x2(t)")
+fig, s2 = plt.subplots()
+s2.plot(t2, x2, 'r', label="x2(t)")
 # for c in range(0, 11):
 #     if(c % 2 ==0):
 #         color = 'g'
