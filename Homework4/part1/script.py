@@ -20,6 +20,23 @@ def c(t):
 def am(t):
     return ( 1 + m(t) ) * c(t)
 
+def lowpassfilter(t):
+    temp = []
+    for x in t:
+        if x >= -100 and t < 100:
+            temp.append(x)
+        else:
+            temp.append(0)
+    return temp
+
+# Demodulation
+def demodule(t):
+    temp = [c(x) for x in t]
+    temp = np.fft.fft(temp)
+    temp = lowpassfilter(temp)
+    temp = np.fft.ifft(temp)
+    return temp
+
 
 # Time 
 time = np.arange(0, T0, TS)
@@ -33,8 +50,9 @@ y2 = [am(x) for x in time]
 # FT
 y2 = np.fft.fft(y2)
 
-fig, s1 = plt.subplots(2)
+fig, s1 = plt.subplots(3)
 s1[0].plot(time, y1)
 s1[1].plot(time, y2)
+s1[2].plot(time, demodule(y2))
 
 plt.show()
