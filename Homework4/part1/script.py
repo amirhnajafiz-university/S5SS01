@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-T0 = 0.1
+T0 = 0.4
 FC = 250
 TS = 0.0001
 
@@ -26,8 +26,12 @@ time = np.arange(0, T0, TS)
 
 # System m
 y1 = [m(x) for x in time]
+# FT
+y1 = np.fft.fft(y1)
 # System am
 y2 = [am(x) for x in time]
+# FT
+y2 = np.fft.fft(y2)
 
 fig, s1 = plt.subplots(2)
 s1[0].plot(time, y1)
