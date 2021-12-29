@@ -31,22 +31,9 @@ def c(t):
 def modulate(t):
     return input_signal(t) * c(t)
 
-def lowpassfilter(t):
-    temp = []
-    for x in t:
-        if x >= -100 and t < 100:
-            temp.append(x)
-        else:
-            temp.append(0)
-    return temp
-
 # Demodulation
-def demodule(t):
-    temp = [c(x) for x in t]
-    temp = np.fft.fft(temp)
-    temp = lowpassfilter(temp)
-    temp = np.fft.ifft(temp)
-    return temp
+def demodulate(t):
+    return modulate(t) * c(t)
 
 
 # Time 
@@ -62,10 +49,17 @@ y2 = [modulate(x) for x in time]
 # FT
 freq_2, res_2 = f_transform(y2, FS, M)
 
-fig, s1 = plt.subplots(4)
+# System of demodulated signal
+y3 = [demodulate(x) for x in time]
+# FT
+freq_3, res_3 = f_transform(y3, FS, M)
+
+fig, s1 = plt.subplots(6)
 s1[0].plot(time, y1)
 s1[1].plot(time, y2)
 s1[2].plot(freq_1, res_1)
 s1[3].plot(freq_2, res_2)
+s1[4].plot(time, y3)
+s1[5].plot(freq_3, res_3)
 
 plt.show()
