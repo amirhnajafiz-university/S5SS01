@@ -7,6 +7,7 @@ FC = 250
 
 FS = 1000
 TS = 0.0001
+M = 1024
 
 # Signal 
 def input_signal(t):
@@ -54,15 +55,17 @@ time = np.linspace(0, TS, FS)
 # System of input signal
 y1 = [input_signal(x) for x in time]
 # FT
-
+freq_1, res_1 = f_transform(y1, FS, M)
 
 # System of modulated signal
 y2 = [modulate(x) for x in time]
 # FT
+freq_2, res_2 = f_transform(y2, FS, M)
 
-fig, s1 = plt.subplots(3)
+fig, s1 = plt.subplots(4)
 s1[0].plot(time, y1)
 s1[1].plot(time, y2)
-s1[2].plot(time, demodule(y2))
+s1[2].plot(freq_1, res_1)
+s1[3].plot(freq_2, res_2)
 
 plt.show()
