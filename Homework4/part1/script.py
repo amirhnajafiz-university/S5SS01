@@ -1,24 +1,34 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 T0 = 0.4
 FC = 250
+
+FS = 1000
 TS = 0.0001
 
 # Signal 
-def m(t):
+def input_signal(t):
     if t >= 0 and t <= T0:
         return np.sinc(100 * t)
     else:
         return 0
+
+# Fourier transform with frequence bandwidth
+def f_transform(x, fs, m):
+    sig = np.fft.fft(x, m)
+    shift_fft = np.abs(np.fft.fftshift(sig))
+    frequence = np.linspace(-fs / 2, fs / 2, m)
+    return (frequence, shift_fft)
 
 # Carrier
 def c(t):
     return np.cos(2 * np.pi * FC * t)
 
 # DSB-AM signal
-def am(t):
-    return ( 1 + m(t) ) * c(t)
+def modulate(t):
+    return input_signal(t) * c(t)
 
 def lowpassfilter(t):
     temp = []
@@ -39,16 +49,16 @@ def demodule(t):
 
 
 # Time 
-time = np.arange(0, T0, TS)
+time = np.linspace(0, TS, FS)
 
-# System m
-y1 = [m(x) for x in time]
+# System of input signal
+y1 = [input_signal(x) for x in time]
 # FT
-y1 = np.fft.fft(y1)
-# System am
-y2 = [am(x) for x in time]
+
+
+# System of modulated signal
+y2 = [modulate(x) for x in time]
 # FT
-y2 = np.fft.fft(y2)
 
 fig, s1 = plt.subplots(3)
 s1[0].plot(time, y1)
