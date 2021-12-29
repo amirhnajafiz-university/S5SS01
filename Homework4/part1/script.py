@@ -2,12 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-T0 = 0.4
+T0 = 0.1
 FC = 250
 
 FS = 1000
 TS = 0.0001
-M = 1024
+M = 1024 * 1024
 
 # Signal 
 def input_signal(t):
@@ -50,7 +50,7 @@ def demodule(t):
 
 
 # Time 
-time = np.linspace(0, TS, FS)
+time = np.linspace(0, T0, FS)
 
 # System of input signal
 y1 = [input_signal(x) for x in time]
