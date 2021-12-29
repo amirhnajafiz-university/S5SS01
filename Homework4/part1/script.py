@@ -35,6 +35,15 @@ def modulate(t):
 def demodulate(t):
     return modulate(t) * c(t)
 
+def lowpassfilter(t, freq):
+    f_filter = []
+    for i in range(freq):
+        if i < 100:
+            f_filter.append(0)
+        else:
+            f_filter.append(1)
+    return np.convolve(t, filter)
+
 
 # Time 
 time = np.linspace(0, T0, FS)
