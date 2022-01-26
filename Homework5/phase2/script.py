@@ -51,7 +51,7 @@ for i in range(len(data)):
     if data[i] < LIMIT:
         data[i] = 0
 
-data = amplify(data, rate2)
+data = amplify(data, rate1)
 
 ## IFFT
 data = ifft(data)
@@ -61,6 +61,9 @@ length = data.shape[0] / samplerate
 
 ## Create time 
 t = np.linspace(0., length, data.shape[0])
+
+## Store into the file
+wavfile.write("output1.wav", samplerate, data.astype(np.int16))
 
 ## Show the signal in plot
 fig, axs = plt.subplots()
