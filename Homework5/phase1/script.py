@@ -6,6 +6,7 @@ import numpy as np
 
 ## Read the wave file
 samplerate, data = wavfile.read('./phase1sample.wav')
+initdata = data
 
 ## FFT
 data = fft(data)
@@ -26,11 +27,12 @@ for i in range(len(data)):
 data = ifft(data)
 
 ## Show the signal in plot
-fig, axs = plt.subplots()
-axs.plot(t[1:250], data[1:250])
+fig, axs = plt.subplots(2)
+axs[0].plot(t[1:250], initdata[1:250])
+axs[1].plot(t[1:250], data[1:250])
 
-plt.legend("Fourier transform")
-plt.xlabel("Frequency")
+plt.legend("De-noised signal")
+plt.xlabel("Time [s]")
 plt.ylabel("Value")
 
 plt.show()
