@@ -46,12 +46,15 @@ samplerate, data = wavfile.read('./phase2sample.wav')
 data = fft(data)
 
 ## Filter
-LIMIT = 250
+LIMIT = 500
 for i in range(len(data)):
     if data[i] < LIMIT:
         data[i] = 0
 
-data = amplify(data, rate1)
+data = amplify(data, rate2)
+
+## IFFT
+data = ifft(data)
 
 ## Calculate length
 length = data.shape[0] / samplerate
@@ -61,7 +64,7 @@ t = np.linspace(0., length, data.shape[0])
 
 ## Show the signal in plot
 fig, axs = plt.subplots()
-axs.plot(t, data)
+axs.plot(t[1:250], data[1:250])
 
 plt.legend("Signal")
 plt.xlabel("Frequence")
