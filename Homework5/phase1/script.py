@@ -1,6 +1,5 @@
-from this import d
 from scipy.io import wavfile 
-from scipy.fft import fft
+from scipy.fft import fft, ifft
 import matplotlib.pyplot as plt 
 import numpy as np
 
@@ -22,10 +21,13 @@ LIMIT = 0.25 * (10 ** 9)
 for i in range(len(data)):
     if data[i] < LIMIT:
         data[i] = 0
+        
+## IFFT
+data = ifft(data)
 
 ## Show the signal in plot
 fig, axs = plt.subplots()
-axs.plot(t, data)
+axs.plot(t[1:250], data[1:250])
 
 plt.legend("Fourier transform")
 plt.xlabel("Frequency")
