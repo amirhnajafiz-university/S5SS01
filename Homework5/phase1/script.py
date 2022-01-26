@@ -14,8 +14,14 @@ data = fft(data)
 ## Calculate length
 length = data.shape[0] / samplerate
 
-# Create time 
+## Create time 
 t = np.linspace(0., length, data.shape[0])
+
+## Filter
+LIMIT = 0.25 * (10 ** 9)
+for i in range(len(data)):
+    if data[i] < LIMIT:
+        data[i] = 0
 
 ## Show the signal in plot
 fig, axs = plt.subplots()
