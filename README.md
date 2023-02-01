@@ -1,8 +1,13 @@
-# Signals-Systems
+<h1 align="center">
+    S5SS01
+</h1>
+
+<br />
 
 Fall 2021 Signals and Systems course at CEIT/AUT.
 
 ## Subjects
+
 - Signals
     - signal representation
         - learn how to display signals
@@ -38,6 +43,7 @@ Fall 2021 Signals and Systems course at CEIT/AUT.
         - amplfying signals
 
 ## Requirements 
+
 - python 3.8
 - matplotlib
 - numpy
